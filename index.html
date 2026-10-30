@@ -56,6 +56,9 @@
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body { background: var(--bg-main); color: var(--text-main); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
 body.locked { overflow: hidden; }
@@ -66,8 +69,7 @@ button { font: inherit; color: inherit; }
 
 /* ---------- header + hero ---------- */
 .top { padding-block: 14px 4px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.logo { font-family: var(--f-display); font-weight: 900; font-size: 22px; letter-spacing: .02em; text-transform: uppercase; color: var(--accent-main); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-.logo svg { width: 24px; height: 24px; }
+.logo { font-family: var(--f-display); font-weight: 900; font-size: 26px; letter-spacing: .02em; text-transform: uppercase; color: var(--accent-main); text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .top nav { display: none; gap: 18px; font-size: 15px; color: var(--text-muted); }
 .top nav a { color: inherit; text-decoration: none; }
 .top nav a:hover { color: var(--accent-main); }
@@ -169,34 +171,48 @@ main { padding-block: 18px 48px; }
 
 /* ---------- footer ---------- */
 footer { background: var(--bg-footer); color: var(--footer-text); }
-footer .wrap { padding-block: 36px calc(36px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 24px; }
-footer h4 { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: 30px; line-height: 1; margin: 0 0 10px; color: #fff; }
+.foot { padding-block: 40px 28px; display: grid; gap: 32px; }
+footer h4 { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: 34px; line-height: .95; margin: 0 0 12px; color: #fff; text-wrap: balance; }
 footer p { margin: 0; opacity: .85; max-width: 46ch; font-size: 15px; }
-footer .cta { margin-top: 16px; background: var(--accent-pop); color: #1a0f20; width: 100%; }
+footer .cta { margin-top: 18px; background: var(--accent-pop); color: #1a0f20; width: 100%; }
 footer .cta:hover { background: #d4a8fd; }
+.foot-links { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.flabel { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; font-weight: 600; color: var(--accent-pop); margin-bottom: 10px; }
+.foot-links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.foot-links button { background: none; border: none; padding: 6px 0; color: var(--footer-text); font-size: 15px; cursor: pointer; text-align: left; opacity: .85; }
+.foot-links button:hover { opacity: 1; color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.foot-bottom { border-top: 1px solid rgba(233, 220, 239, .14); }
+.foot-bottom .wrap { padding-block: 18px calc(18px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.wordmark { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: 20px; letter-spacing: .03em; color: #fff; }
 footer small { opacity: .6; font-size: 13px; }
 
 /* ---------- desktop ---------- */
 @media (min-width: 860px) {
   .top { padding-block: 20px 8px; }
-  .logo { font-size: 26px; }
-  .logo svg { width: 28px; height: 28px; }
+  .logo { font-size: 30px; }
   .top nav { display: flex; }
   .top .addlink { display: none; }
   .hero { grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: end; padding-block: 28px 36px; }
   .hero p { font-size: 17px; }
   .stats b { font-size: 32px; }
   .summary { display: none; }
-  .sports { margin: 0; padding: 0; flex-wrap: wrap; overflow: visible; }
+  .bar { position: static; background: none; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .bar .wrap { padding-block: 0; display: block; }
+  .sports { margin: 0; flex-wrap: wrap; overflow: visible; background: var(--bg-card); border: 1px solid var(--border-color); border-bottom: none; border-radius: 20px 20px 0 0; padding: 18px 22px 16px; }
+  .sports::before { content: "Sport"; flex-basis: 100%; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); font-weight: 600; margin-bottom: 2px; }
   .scrim { display: none; }
-  .panel { position: static; transform: none; visibility: visible; background: none; box-shadow: none; border-radius: 0; max-height: none; }
+  .panel { position: static; transform: none; visibility: visible; background: none; box-shadow: none; border-radius: 0; max-height: none; max-width: 1080px; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
   .grab, .panelhead, .panelfoot { display: none; }
-  .panelbody { padding: 0; overflow: visible; grid-template-columns: 200px 1fr 1.6fr; gap: 16px; align-items: start; }
+  .panelbody { overflow: visible; grid-template-columns: 220px auto minmax(0, 1fr); gap: 0; align-items: stretch; background: var(--bg-card); border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 20px 20px; padding: 0; box-shadow: var(--shadow-elevated); position: relative; }
+  .panelbody::before { content: ""; position: absolute; top: 0; left: 22px; right: 22px; border-top: 1px solid var(--border-color); }
+  .panelbody .group { padding: 16px 22px 20px; }
+  .panelbody .group + .group { border-left: 1px solid var(--border-color); }
   .panel .group.sortgroup { display: none; }
-  .seg .chip { flex: 0 0 auto; min-height: 36px; padding: 6px 12px; font-size: 14px; }
+  .seg { gap: 6px; }
+  .seg .chip { flex: 0 0 auto; min-height: 38px; padding: 6px 13px; font-size: 14px; }
   select, input[type="date"] { min-height: 40px; padding: 7px 10px; font-size: 15px; }
-  .group { gap: 6px; }
-  .datepair { margin-top: 4px; }
+  .group { gap: 8px; }
+  .datepair { max-width: 380px; }
   main { padding-block: 28px 64px; }
   .cardhead { grid-template-columns: 74px minmax(0,1fr) 20px; gap: 18px; padding: 14px 18px 14px 14px; }
   .date b { font-size: 32px; }
@@ -206,7 +222,8 @@ footer small { opacity: .6; font-size: 13px; }
   .detail dl { grid-template-columns: repeat(4, auto); grid-column: 1 / -1; }
   .detail .btn { width: auto; }
   .detail .soon { margin: 0; text-align: left; }
-  footer .wrap { grid-template-columns: 1.3fr 1fr; padding-block: 44px; }
+  .foot { grid-template-columns: 1.2fr 1fr; gap: 64px; padding-block: 64px 48px; align-items: start; }
+  footer h4 { font-size: 46px; }
   footer .cta { width: auto; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -216,7 +233,6 @@ footer small { opacity: .6; font-size: 13px; }
 
 <header class="wrap top">
   <a class="logo" href="#">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="16" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="16" cy="16" r="2.5" fill="currentColor"/></svg>
     Tävlingsjakt
   </a>
   <nav><a href="#flode">Tävlingar</a><a href="#arrangor">För arrangörer</a></nav>
@@ -301,15 +317,27 @@ footer small { opacity: .6; font-size: 13px; }
 </main>
 
 <footer id="arrangor">
-  <div class="wrap">
+  <div class="wrap foot">
     <div>
       <h4>Arrangerar du en tävling?</h4>
       <p>Lägg upp den gratis så hittar tävlande från hela landet dit. Det tar ett par minuter.</p>
       <button class="btn cta" type="button" id="addBtn">Lägg till tävling</button>
       <p id="addMsg" hidden style="margin-top:10px">Formuläret för arrangörer kommer snart.</p>
     </div>
-    <div style="align-self:end"><small>Tävlingsjakt · Ett projekt från Helsingborg · 2026</small></div>
+    <div class="foot-links">
+      <div><span class="flabel">Sporter</span><ul id="footSports"></ul></div>
+      <div><span class="flabel">Hitta snabbt</span><ul>
+        <li><button type="button" data-quick="near">Närmast mig</button></li>
+        <li><button type="button" data-quick="30">Kommande 30 dagar</button></li>
+        <li><button type="button" data-quick="close">Anmälan stänger snart</button></li>
+        <li><button type="button" data-quick="all">Alla tävlingar</button></li>
+      </ul></div>
+    </div>
   </div>
+  <div class="foot-bottom"><div class="wrap">
+    <span class="wordmark">Tävlingsjakt</span>
+    <small>© 2026 · Ett projekt från Helsingborg</small>
+  </div></div>
 </footer>
 
 <script>
@@ -361,7 +389,7 @@ const DAYS = ["sön","mån","tis","ons","tor","fre","lör"];
 const DISTS = [[0,"Hela landet"],[50,"50 km"],[100,"100 km"],[250,"250 km"],[500,"500 km"]];
 const PRESETS = [["all","Alla datum"],["30","30 dagar"],["90","3 månader"],["custom","Välj datum"]];
 
-const state = { sports: new Set(), from: "Helsingborg", maxDist: 0, preset: "all", dFrom: "", dTo: "", sort: "date", open: null };
+const state = { sports: new Set(), from: "Helsingborg", maxDist: 0, preset: "all", dFrom: "", dTo: "", sort: "date", open: null, closing: false };
 
 function km(a, b) {
   const [la1, lo1] = CITIES[a], [la2, lo2] = CITIES[b];
@@ -406,6 +434,7 @@ function filtered() {
     .filter(e => !state.maxDist || e.km <= state.maxDist)
     .filter(e => !f || e.d >= f)
     .filter(e => !t || e.d <= t)
+    .filter(e => !state.closing || (new Date(e.close+"T23:59:00") - TODAY)/86400000 <= 14)
     .sort((a,b) => state.sort==="dist" ? a.km-b.km || a.d.localeCompare(b.d) : a.d.localeCompare(b.d) || a.km-b.km);
 }
 
@@ -481,7 +510,7 @@ function card(e) {
 function render() {
   const list = filtered();
   const txt = `${list.length} ${list.length===1?"tävling":"tävlingar"}`;
-  $("resultCount").textContent = txt;
+  $("resultCount").textContent = state.closing ? txt + " · anmälan stänger snart" : txt;
   $("showBtn").textContent = list.length ? `Visa ${txt}` : "Inga träffar";
   const feed = $("feed");
   if (!list.length) {
@@ -499,7 +528,21 @@ function render() {
 }
 
 function update() { renderControls(); render(); save(); }
-function reset() { Object.assign(state, {sports:new Set(), maxDist:0, preset:"all", dFrom:"", dTo:"", sort:"date"}); update(); }
+function reset() { Object.assign(state, {sports:new Set(), maxDist:0, preset:"all", dFrom:"", dTo:"", sort:"date", closing:false}); update(); }
+const toFeed = () => document.querySelector(".bar").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+sportList.forEach(s => {
+  const li = document.createElement("li"), b = document.createElement("button");
+  b.type = "button"; b.textContent = s;
+  b.onclick = () => { reset(); state.sports.add(s); update(); toFeed(); };
+  li.appendChild(b); $("footSports").appendChild(li);
+});
+document.querySelectorAll("[data-quick]").forEach(b => b.onclick = () => {
+  const q = b.dataset.quick; reset();
+  if (q==="near") state.sort = "dist";
+  if (q==="30") state.preset = "30";
+  if (q==="close") state.closing = true;
+  update(); toFeed();
+});
 
 /* bottom sheet */
 const mq = window.matchMedia("(min-width: 860px)");
